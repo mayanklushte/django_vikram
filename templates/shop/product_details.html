@@ -1,0 +1,16 @@
+{% extends 'shop_base.html' %} {% block body %}
+<div class="card" style="width: 18rem">
+  <img
+    class="card-img-top"
+    src="{{ product.Product_Image.url}}"
+    alt="Card image cap"
+  />
+  <div class="card-body">
+    <p class="card-text">
+      {{ product.Product_Name }} <br />
+      {{product.Description}}<br />
+      {{product.Price}}
+    </p>
+  </div>
+</div>
+{% endblock body %}

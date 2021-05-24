@@ -1,0 +1,51 @@
+{% extends 'shop_base.html' %} {% block body %}
+
+<div class="container border p-5 m-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product Image</th>
+
+        <th scope="col">Product Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in object_list %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>
+          <img
+            src="{{i.Product_Image.url}}"
+            width="60px"
+            height="40px"
+            alt="No Image"
+          />
+        </td>
+        <td>{{i.Product_Name}}</td>
+        <td>{{i.Description}}</td>
+        <td>{{i.Quantity}}</td>
+        <td>{{i.Brand_Name}}</td>
+        <td>{{i.Price}}</td>
+        <td>
+          <a class="btn btn-primary" href="{% url 'shop:product_detail' i.id %}"
+            >Details</a
+          >
+          <a class="btn btn-primary" href="{% url 'shop:update_product' i.id %}"
+            >Update</a
+          >
+          <a class="btn btn-primary" href="{% url 'shop:product_delete' i.id %}"
+            >DELETE</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}

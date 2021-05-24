@@ -1,0 +1,52 @@
+{% extends 'customer_base.html' %} {% block body %}
+
+<div class="container border p-5 m-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product Image</th>
+
+        <th scope="col">Product Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in object.item.all %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>
+          <img
+            src="{{i.product.Product_Image.url}}"
+            width="60px"
+            height="40px"
+            alt="No Image"
+          />
+        </td>
+        <td>{{i.product.Product_Name}}</td>
+        <td>{{i.product.Description}}</td>
+
+        <td>{{i.product.Brand_Name}}</td>
+        <td>{{i.product.Price}}</td>
+        <td>
+          <a
+            href="{% url 'customer:add_to_cart_summary' i.product.id %}"
+            class="btn btn-sm btn-primary"
+            >+</a
+          >
+          {{i.quantity}}
+          <a
+            href="{% url 'customer:remove_single_item' i.product.id %}"
+            class="btn btn-sm btn-primary"
+            >-</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}

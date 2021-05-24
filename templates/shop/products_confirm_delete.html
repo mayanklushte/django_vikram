@@ -1,0 +1,13 @@
+{% extends 'shop_base.html' %} {% block body %}
+
+<div class="container border p-5 m-3">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} Are You sure You want to delete this product ?
+
+    <button type="submit" class="btn btn-sm btn-danger">Yes</button>
+    <a href="{% url 'shop:product_list' %}" class="btn btn-sm btn-primary"
+      >No</a
+    >
+  </form>
+</div>
+{% endblock body %}
