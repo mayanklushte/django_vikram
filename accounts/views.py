@@ -4,6 +4,12 @@ from django.views.generic.edit import CreateView
 from .models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegisterForm
+from shop.models import Products
+
+
+def index(request):
+    products = Products.objects.all()
+    return render(request, 'accounts/index.html', {'products': products})
 
 
 def customer_register(request):

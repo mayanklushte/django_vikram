@@ -1,0 +1,30 @@
+{% extends 'accounts_base.html' %} 
+{% load static %}
+{% block title %} Home Page {% endblock title%} 
+{% block style %} 
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock style %} 
+{% block body %} 
+    <div class="container">
+        <div class="row">
+        {% for i in products %}
+        
+        <div class="card mt-3 mr-3 col-md-3 {% cycle 'row1' 'row2' 'row3' %}" style="width: 18rem;"">
+            <img src="{{ i.Product_Image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ i.Product_Name|capfirst }}</h5>
+              <p class="card-text">{{ i.Description }}</p>
+              <p class="card-text">{{ i.Price|add:"2" }}</p>
+              
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+    <div class="container">
+        <img src="{% static 'images/back.jpg' %}" alt="">
+    </div>
+
+{% endblock body %}
+
