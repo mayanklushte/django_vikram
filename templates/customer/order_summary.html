@@ -1,4 +1,55 @@
-{% extends 'customer_base.html' %} {% block body %}
+{% extends 'customer_base.html' %} {% block body %} {% block cart %}
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CART ITEMS</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          {% for i in cart_item %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ i.product.Product_Name }}</h5>
+
+              <p class="card-text">Price: {{ i.product.Price }}</p>
+              <a
+                class="card-link btn btn-sm btn-primary"
+                href="{% url 'customer:add_to_cart_summary' i.product.id %}"
+                >+</a
+              >
+              {{i.quantity}}
+              <a
+                href="{% url 'customer:remove_single_item' i.product.id %}"
+                class="card-link btn btn-sm btn-primary"
+                >-</a
+              >
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock cart %}
 
 <div class="container border p-5 m-3">
   <table class="table">
@@ -10,7 +61,8 @@
         <th scope="col">Product Name</th>
         <th scope="col">Description</th>
         <th scope="col">Brand Name</th>
-        <th scope="col">Price</th>
+        <th scope="col">Product Price</th>
+        <th scope="col">Total Price</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -31,6 +83,7 @@
 
         <td>{{i.product.Brand_Name}}</td>
         <td>{{i.product.Price}}</td>
+        <td>{{i.get_total_item_price}}</td>
         <td>
           <a
             href="{% url 'customer:add_to_cart_summary' i.product.id %}"
@@ -46,6 +99,16 @@
         </td>
       </tr>
       {% endfor %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total: {{ object.get_total }}</td>
+      </tr>
     </tbody>
   </table>
 </div>

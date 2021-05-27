@@ -13,6 +13,9 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity} of {self.product.Product_Name}'
+    
+    def get_total_item_price(self):
+        return self.quantity * self.product.Price
 
 
 class Order(models.Model):
@@ -25,6 +28,12 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+    def get_total(self):
+        total = 0
+        for i in self.item.all():
+            total += i.get_total_item_price()
+        return total
 
 
 class BillingAddress(models.Model):
