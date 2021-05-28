@@ -109,6 +109,30 @@
         <td></td>
         <td>Total: {{ object.get_total }}</td>
       </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Gst Total: {{ object.gst_price }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <a class="btn btn-sm btn-primary" href="{% url 'customer:CheckOut' %}"
+            >Checkout</a
+          >
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

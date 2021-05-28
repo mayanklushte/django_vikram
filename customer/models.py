@@ -35,6 +35,15 @@ class Order(models.Model):
             total += i.get_total_item_price()
         return total
 
+    def gst_price(self):
+        total = 0
+        for i in self.item.all():
+            total += i.get_total_item_price()
+        gst_amount = (total * 12)/100
+        gst = total + gst_amount
+        return int(gst)
+
+
 
 class BillingAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
